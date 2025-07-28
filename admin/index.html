@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Ivan Moreira</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <style>
+        :root {
+            --primary-color: #007AFF;
+            --secondary-color: #5856D6;
+            --text-primary: #1D1D1F;
+            --text-secondary: #86868B;
+            --background-primary: #FFFFFF;
+            --background-secondary: #F2F2F7;
+            --border-color: #D1D1D6;
+            --error-color: #FF3B30;
+            --success-color: #34C759;
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --transition-fast: 0.15s ease-out;
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #FFFFFF;
+            --text-secondary: #98989D;
+            --background-primary: #000000;
+            --background-secondary: #1C1C1E;
+            --border-color: #38383A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background: linear-gradient(135deg, var(--background-primary) 0%, var(--background-secondary) 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            transition: background var(--transition-fast), color var(--transition-fast);
+        }
+
+        .login-container {
+            background-color: var(--background-primary);
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid var(--border-color);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .login-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .login-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background-color: var(--background-secondary);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .login-button {
+            width: 100%;
+            padding: var(--spacing-md);
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color var(--transition-fast);
+            font-family: var(--font-family);
+        }
+
+        .login-button:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .login-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .error-message {
+            background-color: rgba(255, 59, 48, 0.1);
+            color: var(--error-color);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-lg);
+            font-size: 0.875rem;
+            border: 1px solid rgba(255, 59, 48, 0.2);
+        }
+
+        .success-message {
+            background-color: rgba(52, 199, 89, 0.1);
+            color: var(--success-color);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--spacing-lg);
+            font-size: 0.875rem;
+            border: 1px solid rgba(52, 199, 89, 0.2);
+        }
+
+        .theme-toggle {
+            position: absolute;
+            top: var(--spacing-lg);
+            right: var(--spacing-lg);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-md);
+            transition: background-color var(--transition-fast);
+            font-size: 1.2rem;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--background-secondary);
+        }
+
+        .back-link {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+        }
+
+        .back-link a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color var(--transition-fast);
+        }
+
+        .back-link a:hover {
+            color: var(--primary-color);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 480px) {
+            .login-container {
+                margin: var(--spacing-lg);
+                padding: var(--spacing-lg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+        <span class="theme-icon light-icon">☀️</span>
+        <span class="theme-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="login-container">
+        <div class="login-header">
+            <h1 class="login-title">Admin Access</h1>
+            <p class="login-subtitle">Content Management System</p>
+        </div>
+
+        <div id="error-message" class="error-message hidden"></div>
+        <div id="success-message" class="success-message hidden"></div>
+
+        <form id="login-form">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" id="username" name="username" class="form-input" required autocomplete="username">
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" id="password" name="password" class="form-input" required autocomplete="current-password">
+            </div>
+
+            <button type="submit" class="login-button" id="login-button">
+                Sign In
+            </button>
+        </form>
+
+        <div class="back-link">
+            <a href="/">← Back to Website</a>
+        </div>
+    </div>
+
+    <script>
+        // Theme management
+        class ThemeManager {
+            constructor() {
+                this.theme = localStorage.getItem('theme') || 'light';
+                this.init();
+            }
+
+            init() {
+                this.setTheme(this.theme);
+                this.bindEvents();
+            }
+
+            setTheme(theme) {
+                this.theme = theme;
+                document.documentElement.setAttribute('data-theme', theme);
+                localStorage.setItem('theme', theme);
+                this.updateThemeIcon();
+            }
+
+            updateThemeIcon() {
+                const lightIcon = document.querySelector('.light-icon');
+                const darkIcon = document.querySelector('.dark-icon');
+                
+                if (this.theme === 'dark') {
+                    lightIcon.style.display = 'none';
+                    darkIcon.style.display = 'inline';
+                } else {
+                    lightIcon.style.display = 'inline';
+                    darkIcon.style.display = 'none';
+                }
+            }
+
+            toggleTheme() {
+                const newTheme = this.theme === 'light' ? 'dark' : 'light';
+                this.setTheme(newTheme);
+            }
+
+            bindEvents() {
+                const themeToggle = document.getElementById('theme-toggle');
+                if (themeToggle) {
+                    themeToggle.addEventListener('click', () => this.toggleTheme());
+                }
+            }
+        }
+
+        // Login management
+        class LoginManager {
+            constructor() {
+                this.form = document.getElementById('login-form');
+                this.usernameInput = document.getElementById('username');
+                this.passwordInput = document.getElementById('password');
+                this.loginButton = document.getElementById('login-button');
+                this.errorMessage = document.getElementById('error-message');
+                this.successMessage = document.getElementById('success-message');
+                
+                // Default credentials (in production, this should be handled server-side)
+                this.credentials = {
+                    username: 'admin',
+                    password: 'IvanMoreira2025!'
+                };
+                
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.checkExistingSession();
+            }
+
+            bindEvents() {
+                this.form.addEventListener('submit', (e) => this.handleLogin(e));
+            }
+
+            checkExistingSession() {
+                const session = localStorage.getItem('admin_session');
+                if (session) {
+                    const sessionData = JSON.parse(session);
+                    const now = new Date().getTime();
+                    
+                    // Check if session is still valid (24 hours)
+                    if (now - sessionData.timestamp < 24 * 60 * 60 * 1000) {
+                        this.redirectToAdmin();
+                        return;
+                    } else {
+                        localStorage.removeItem('admin_session');
+                    }
+                }
+            }
+
+            async handleLogin(e) {
+                e.preventDefault();
+                
+                const username = this.usernameInput.value.trim();
+                const password = this.passwordInput.value;
+                
+                this.hideMessages();
+                this.setLoading(true);
+                
+                // Simulate authentication delay
+                await new Promise(resolve => setTimeout(resolve, 1000));
+                
+                if (this.validateCredentials(username, password)) {
+                    this.createSession();
+                    this.showSuccess('Login successful! Redirecting...');
+                    
+                    setTimeout(() => {
+                        this.redirectToAdmin();
+                    }, 1500);
+                } else {
+                    this.showError('Invalid username or password. Please try again.');
+                    this.setLoading(false);
+                }
+            }
+
+            validateCredentials(username, password) {
+                return username === this.credentials.username && password === this.credentials.password;
+            }
+
+            createSession() {
+                const sessionData = {
+                    username: this.credentials.username,
+                    timestamp: new Date().getTime(),
+                    expires: new Date().getTime() + (24 * 60 * 60 * 1000) // 24 hours
+                };
+                
+                localStorage.setItem('admin_session', JSON.stringify(sessionData));
+            }
+
+            redirectToAdmin() {
+                window.location.href = '/admin/dashboard.html';
+            }
+
+            setLoading(loading) {
+                this.loginButton.disabled = loading;
+                this.loginButton.textContent = loading ? 'Signing In...' : 'Sign In';
+            }
+
+            showError(message) {
+                this.errorMessage.textContent = message;
+                this.errorMessage.classList.remove('hidden');
+                this.successMessage.classList.add('hidden');
+            }
+
+            showSuccess(message) {
+                this.successMessage.textContent = message;
+                this.successMessage.classList.remove('hidden');
+                this.errorMessage.classList.add('hidden');
+            }
+
+            hideMessages() {
+                this.errorMessage.classList.add('hidden');
+                this.successMessage.classList.add('hidden');
+            }
+        }
+
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new ThemeManager();
+            new LoginManager();
+        });
+
+        // Security: Clear form on page unload
+        window.addEventListener('beforeunload', () => {
+            document.getElementById('login-form').reset();
+        });
+    </script>
+</body>
+</html>
+

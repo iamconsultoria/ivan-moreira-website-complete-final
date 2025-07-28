@@ -1,0 +1,77 @@
+# Site statistics
+stats:
+  - number: "15+"
+    label: "Years Experience"
+    description: "Leading complex digital transformation projects"
+  - number: "200+"
+    label: "Projects Delivered"
+    description: "Successful implementations across industries"
+  - number: "50+"
+    label: "Speaking Engagements"
+    description: "International conferences and workshops"
+  - number: "95%"
+    label: "Client Satisfaction"
+    description: "Consistently exceeding expectations"
+
+# Hero section
+hero:
+  title: "Strategic Project Manager & Digital Transformation Consultant"
+  subtitle: "Helping organizations navigate complex transformations with AI-enhanced methodologies and proven leadership strategies."
+  cta_text: "Let's Transform Together"
+  cta_link: "/contact/"
+  background_image: "/assets/images/hero-background.jpg"
+
+# About section
+about:
+  title: "Driving Innovation Through Strategic Leadership"
+  description: "With over 15 years of experience in project management and digital transformation, I help organizations navigate the complexities of modern business challenges. My expertise spans AI integration, change management, and strategic consulting across diverse industries."
+  image: "/assets/images/ivan-profile.jpg"
+  
+# Services overview
+services_intro:
+  title: "Comprehensive Consulting Services"
+  description: "Tailored solutions for your organization's unique challenges"
+
+# Speaking overview
+speaking_intro:
+  title: "Thought Leadership & Speaking"
+  description: "Sharing insights on digital transformation and project management excellence"
+
+# Blog overview
+blog_intro:
+  title: "Latest Insights & Articles"
+  description: "Thought leadership on digital transformation, AI, and project management"
+
+# Contact section
+contact_cta:
+  title: "Ready to Transform Your Organization?"
+  description: "Let's discuss how we can accelerate your digital transformation journey."
+  button_text: "Start the Conversation"
+
+# Social media
+social:
+  linkedin: "https://linkedin.com/in/ivanmoreira"
+  twitter: "https://twitter.com/ivanmoreira"
+  github: "https://github.com/ivanmoreira"
+  email: "ivan@ivanmoreira.com"
+
+# Testimonials
+testimonials:
+  - quote: "Ivan's strategic approach to digital transformation helped us achieve a 40% increase in operational efficiency within six months."
+    author: "Sarah Chen"
+    position: "CTO, TechCorp Global"
+    company: "TechCorp Global"
+    image: "/assets/images/testimonial-sarah.jpg"
+  
+  - quote: "His AI-enhanced project management methodologies revolutionized how we approach complex initiatives."
+    author: "Michael Rodriguez"
+    position: "VP of Operations"
+    company: "Innovation Labs"
+    image: "/assets/images/testimonial-michael.jpg"
+  
+  - quote: "Ivan's speaking engagement at our conference was the highest-rated session. His insights are invaluable."
+    author: "Dr. Emily Watson"
+    position: "Conference Director"
+    company: "Global PM Summit"
+    image: "/assets/images/testimonial-emily.jpg"
+

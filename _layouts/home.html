@@ -1,0 +1,190 @@
+---
+layout: default
+---
+
+<!-- Hero Section -->
+<section class="hero">
+    <div class="hero-container">
+        <div class="hero-content">
+            <h1 class="hero-title">{{ site.data.site.hero.title }}</h1>
+            <p class="hero-subtitle">{{ site.data.site.hero.subtitle }}</p>
+            <a href="{{ site.data.site.hero.cta_link }}" class="cta-button primary">
+                {{ site.data.site.hero.cta_text }}
+            </a>
+        </div>
+        <div class="hero-image">
+            <img src="/assets/images/ivan-hero.jpg" alt="Ivan Moreira - Strategic Project Manager" class="hero-img">
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="stats">
+    <div class="stats-container">
+        <div class="stats-grid">
+            {% for stat in site.data.site.stats %}
+            <div class="stat-item">
+                <div class="stat-number">{{ stat.number }}</div>
+                <div class="stat-label">{{ stat.label }}</div>
+                <div class="stat-description">{{ stat.description }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-preview">
+    <div class="about-container">
+        <div class="about-content">
+            <div class="about-text">
+                <h2 class="section-title">{{ site.data.site.about.title }}</h2>
+                <p class="section-description">{{ site.data.site.about.description }}</p>
+                <a href="/about/" class="cta-button secondary">Learn More About Ivan</a>
+            </div>
+            <div class="about-image">
+                <img src="{{ site.data.site.about.image }}" alt="Ivan Moreira" class="about-img">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="services-preview">
+    <div class="services-container">
+        <div class="section-header">
+            <h2 class="section-title">{{ site.data.site.services_intro.title }}</h2>
+            <p class="section-description">{{ site.data.site.services_intro.description }}</p>
+        </div>
+        
+        <div class="services-grid">
+            {% for service in site.services limit:3 %}
+            <div class="service-card">
+                <div class="service-icon">
+                    <img src="{{ service.icon }}" alt="{{ service.title }} icon">
+                </div>
+                <h3 class="service-title">{{ service.title }}</h3>
+                <p class="service-description">{{ service.excerpt | strip_html | truncate: 120 }}</p>
+                <a href="{{ service.url }}" class="service-link">Learn More</a>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="section-cta">
+            <a href="/services/" class="cta-button secondary">View All Services</a>
+        </div>
+    </div>
+</section>
+
+<!-- Speaking Section -->
+<section class="speaking-preview">
+    <div class="speaking-container">
+        <div class="section-header">
+            <h2 class="section-title">{{ site.data.site.speaking_intro.title }}</h2>
+            <p class="section-description">{{ site.data.site.speaking_intro.description }}</p>
+        </div>
+        
+        <div class="speaking-content">
+            <div class="speaking-topics">
+                <h3>Key Speaking Topics</h3>
+                <ul class="topics-list">
+                    <li>AI-Enhanced Project Management</li>
+                    <li>Digital Transformation Strategies</li>
+                    <li>Change Management Excellence</li>
+                    <li>Strategic Leadership in Technology</li>
+                </ul>
+            </div>
+            
+            <div class="speaking-stats">
+                <div class="speaking-stat">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Speaking Engagements</span>
+                </div>
+                <div class="speaking-stat">
+                    <span class="stat-number">15</span>
+                    <span class="stat-label">Countries</span>
+                </div>
+                <div class="speaking-stat">
+                    <span class="stat-number">10,000+</span>
+                    <span class="stat-label">Audience Members</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section-cta">
+            <a href="/speaking/" class="cta-button secondary">Book Ivan for Speaking</a>
+        </div>
+    </div>
+</section>
+
+<!-- Blog Section -->
+<section class="blog-preview">
+    <div class="blog-container">
+        <div class="section-header">
+            <h2 class="section-title">{{ site.data.site.blog_intro.title }}</h2>
+            <p class="section-description">{{ site.data.site.blog_intro.description }}</p>
+        </div>
+        
+        <div class="blog-grid">
+            {% for post in site.posts limit:3 %}
+            <article class="blog-card">
+                <div class="blog-image">
+                    <img src="{{ post.image | default: '/assets/images/blog-default.jpg' }}" alt="{{ post.title }}">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
+                        <span class="blog-category">{{ post.category }}</span>
+                    </div>
+                    <h3 class="blog-title">{{ post.title }}</h3>
+                    <p class="blog-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+                    <a href="{{ post.url }}" class="blog-link">Read More</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        
+        <div class="section-cta">
+            <a href="/blog/" class="cta-button secondary">View All Articles</a>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials Section -->
+<section class="testimonials">
+    <div class="testimonials-container">
+        <h2 class="section-title">What Clients Say</h2>
+        
+        <div class="testimonials-grid">
+            {% for testimonial in site.data.site.testimonials %}
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    <blockquote class="testimonial-quote">
+                        "{{ testimonial.quote }}"
+                    </blockquote>
+                    <div class="testimonial-author">
+                        <img src="{{ testimonial.image }}" alt="{{ testimonial.author }}" class="author-image">
+                        <div class="author-info">
+                            <div class="author-name">{{ testimonial.author }}</div>
+                            <div class="author-position">{{ testimonial.position }}</div>
+                            <div class="author-company">{{ testimonial.company }}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Contact CTA Section -->
+<section class="contact-cta">
+    <div class="contact-cta-container">
+        <div class="contact-cta-content">
+            <h2 class="contact-cta-title">{{ site.data.site.contact_cta.title }}</h2>
+            <p class="contact-cta-description">{{ site.data.site.contact_cta.description }}</p>
+            <a href="/contact/" class="cta-button primary">{{ site.data.site.contact_cta.button_text }}</a>
+        </div>
+    </div>
+</section>
+

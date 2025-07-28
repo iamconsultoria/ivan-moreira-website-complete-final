@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Ivan Moreira</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <style>
+        :root {
+            --primary-color: #007AFF;
+            --secondary-color: #5856D6;
+            --success-color: #34C759;
+            --warning-color: #FF9500;
+            --error-color: #FF3B30;
+            --text-primary: #1D1D1F;
+            --text-secondary: #86868B;
+            --text-tertiary: #C7C7CC;
+            --background-primary: #FFFFFF;
+            --background-secondary: #F2F2F7;
+            --background-tertiary: #FFFFFF;
+            --border-color: #D1D1D6;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-sm: 0.375rem;
+            --radius-md: 0.5rem;
+            --radius-lg: 0.75rem;
+            --radius-xl: 1rem;
+            --spacing-xs: 0.25rem;
+            --spacing-sm: 0.5rem;
+            --spacing-md: 1rem;
+            --spacing-lg: 1.5rem;
+            --spacing-xl: 2rem;
+            --spacing-2xl: 3rem;
+            --transition-fast: 0.15s ease-out;
+            --transition-normal: 0.3s ease-out;
+        }
+
+        [data-theme="dark"] {
+            --text-primary: #FFFFFF;
+            --text-secondary: #98989D;
+            --text-tertiary: #48484A;
+            --background-primary: #000000;
+            --background-secondary: #1C1C1E;
+            --background-tertiary: #2C2C2E;
+            --border-color: #38383A;
+            --shadow-color: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--background-secondary);
+            color: var(--text-primary);
+            transition: background-color var(--transition-normal), color var(--transition-normal);
+        }
+
+        .admin-header {
+            background-color: var(--background-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: var(--spacing-md) var(--spacing-xl);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .admin-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .admin-controls {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--spacing-sm);
+            border-radius: var(--radius-md);
+            transition: background-color var(--transition-fast);
+            font-size: 1.1rem;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--background-secondary);
+        }
+
+        .logout-btn {
+            background-color: var(--error-color);
+            color: white;
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            transition: opacity var(--transition-fast);
+        }
+
+        .logout-btn:hover {
+            opacity: 0.8;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--spacing-xl);
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-xl);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .dashboard-card {
+            background-color: var(--background-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            box-shadow: 0 4px 20px var(--shadow-color);
+            border: 1px solid var(--border-color);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .card-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .action-btn {
+            background-color: var(--background-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-lg);
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all var(--transition-fast);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--shadow-color);
+            border-color: var(--primary-color);
+        }
+
+        .action-icon {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .action-title {
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .action-description {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .content-section {
+            background-color: var(--background-primary);
+            border-radius: var(--radius-xl);
+            padding: var(--spacing-xl);
+            box-shadow: 0 4px 20px var(--shadow-color);
+            border: 1px solid var(--border-color);
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            transition: background-color var(--transition-fast);
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+        }
+
+        .btn-secondary {
+            background-color: var(--background-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--background-tertiary);
+        }
+
+        .content-list {
+            list-style: none;
+        }
+
+        .content-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .content-item:last-child {
+            border-bottom: none;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-title {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .item-meta {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .item-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .btn-small {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            font-size: 0.875rem;
+        }
+
+        .status-badge {
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-sm);
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .status-published {
+            background-color: rgba(52, 199, 89, 0.1);
+            color: var(--success-color);
+        }
+
+        .status-draft {
+            background-color: rgba(255, 149, 0, 0.1);
+            color: var(--warning-color);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background-color: var(--background-primary);
+            margin: 5% auto;
+            padding: var(--spacing-xl);
+            border-radius: var(--radius-xl);
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--spacing-lg);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-secondary);
+            padding: var(--spacing-xs);
+        }
+
+        .form-group {
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: var(--spacing-sm);
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .form-input,
+        .form-textarea,
+        .form-select {
+            width: 100%;
+            padding: var(--spacing-md);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background-color: var(--background-secondary);
+            color: var(--text-primary);
+            font-family: var(--font-family);
+            transition: border-color var(--transition-fast);
+        }
+
+        .form-input:focus,
+        .form-textarea:focus,
+        .form-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .admin-header {
+                padding: var(--spacing-md);
+            }
+
+            .admin-container {
+                padding: var(--spacing-md);
+            }
+
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quick-actions {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .quick-actions {
+                grid-template-columns: 1fr;
+            }
+
+            .content-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+
+            .item-actions {
+                align-self: stretch;
+                justify-content: flex-end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="admin-header">
+        <h1 class="admin-title">Content Management Dashboard</h1>
+        <div class="admin-controls">
+            <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+                <span class="theme-icon light-icon">☀️</span>
+                <span class="theme-icon dark-icon">🌙</span>
+            </button>
+            <button class="logout-btn" id="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <!-- Dashboard Stats -->
+        <div class="dashboard-grid">
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Blog Posts</h2>
+                    <span class="card-icon">📝</span>
+                </div>
+                <div class="stat-number" id="posts-count">12</div>
+                <div class="stat-label">Published articles</div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Services</h2>
+                    <span class="card-icon">🎯</span>
+                </div>
+                <div class="stat-number" id="services-count">3</div>
+                <div class="stat-label">Active services</div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Speaking Events</h2>
+                    <span class="card-icon">🎤</span>
+                </div>
+                <div class="stat-number" id="events-count">8</div>
+                <div class="stat-label">Upcoming events</div>
+            </div>
+
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <h2 class="card-title">Site Views</h2>
+                    <span class="card-icon">📊</span>
+                </div>
+                <div class="stat-number" id="views-count">2.4K</div>
+                <div class="stat-label">This month</div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <button class="action-btn" onclick="openModal('new-post-modal')">
+                <span class="action-icon">✍️</span>
+                <span class="action-title">New Blog Post</span>
+                <span class="action-description">Create a new article</span>
+            </button>
+
+            <button class="action-btn" onclick="openModal('edit-content-modal')">
+                <span class="action-icon">✏️</span>
+                <span class="action-title">Edit Content</span>
+                <span class="action-description">Update site content</span>
+            </button>
+
+            <button class="action-btn" onclick="openModal('manage-images-modal')">
+                <span class="action-icon">🖼️</span>
+                <span class="action-title">Manage Images</span>
+                <span class="action-description">Upload and organize</span>
+            </button>
+
+            <button class="action-btn" onclick="openModal('site-settings-modal')">
+                <span class="action-icon">⚙️</span>
+                <span class="action-title">Site Settings</span>
+                <span class="action-description">Configure website</span>
+            </button>
+        </div>
+
+        <!-- Recent Blog Posts -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Recent Blog Posts</h2>
+                <button class="btn" onclick="openModal('new-post-modal')">+ New Post</button>
+            </div>
+            
+            <ul class="content-list" id="posts-list">
+                <li class="content-item">
+                    <div class="item-info">
+                        <div class="item-title">The Future of Project Management: AI Integration</div>
+                        <div class="item-meta">Published March 15, 2024 • AI & Technology</div>
+                    </div>
+                    <div class="item-actions">
+                        <span class="status-badge status-published">Published</span>
+                        <button class="btn btn-secondary btn-small">Edit</button>
+                        <button class="btn btn-secondary btn-small">Delete</button>
+                    </div>
+                </li>
+                
+                <li class="content-item">
+                    <div class="item-info">
+                        <div class="item-title">Digital Transformation Strategies for 2024</div>
+                        <div class="item-meta">Draft • Digital Transformation</div>
+                    </div>
+                    <div class="item-actions">
+                        <span class="status-badge status-draft">Draft</span>
+                        <button class="btn btn-secondary btn-small">Edit</button>
+                        <button class="btn btn-secondary btn-small">Delete</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Services Management -->
+        <div class="content-section">
+            <div class="section-header">
+                <h2 class="section-title">Services</h2>
+                <button class="btn" onclick="openModal('edit-service-modal')">Edit Services</button>
+            </div>
+            
+            <ul class="content-list" id="services-list">
+                <li class="content-item">
+                    <div class="item-info">
+                        <div class="item-title">Digital Transformation Consulting</div>
+                        <div class="item-meta">Strategic guidance for comprehensive digital transformation</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-secondary btn-small">Edit</button>
+                    </div>
+                </li>
+                
+                <li class="content-item">
+                    <div class="item-info">
+                        <div class="item-title">Strategic Project Management</div>
+                        <div class="item-meta">AI-enhanced project management methodologies</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-secondary btn-small">Edit</button>
+                    </div>
+                </li>
+                
+                <li class="content-item">
+                    <div class="item-info">
+                        <div class="item-title">Executive Consulting & Advisory</div>
+                        <div class="item-meta">C-level strategic advisory services</div>
+                    </div>
+                    <div class="item-actions">
+                        <button class="btn btn-secondary btn-small">Edit</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- New Post Modal -->
+    <div id="new-post-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Create New Blog Post</h2>
+                <button class="close-btn" onclick="closeModal('new-post-modal')">&times;</button>
+            </div>
+            
+            <form id="new-post-form">
+                <div class="form-group">
+                    <label for="post-title" class="form-label">Title</label>
+                    <input type="text" id="post-title" class="form-input" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-category" class="form-label">Category</label>
+                    <select id="post-category" class="form-select" required>
+                        <option value="">Select category</option>
+                        <option value="ai-technology">AI & Technology</option>
+                        <option value="project-management">Project Management</option>
+                        <option value="digital-transformation">Digital Transformation</option>
+                        <option value="leadership">Leadership</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-excerpt" class="form-label">Excerpt</label>
+                    <textarea id="post-excerpt" class="form-textarea" placeholder="Brief description of the article..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-content" class="form-label">Content</label>
+                    <textarea id="post-content" class="form-textarea" rows="10" placeholder="Write your article content here..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-image" class="form-label">Featured Image URL</label>
+                    <input type="url" id="post-image" class="form-input" placeholder="https://example.com/image.jpg">
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn">Create Post</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('new-post-modal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Content Modal -->
+    <div id="edit-content-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Site Content</h2>
+                <button class="close-btn" onclick="closeModal('edit-content-modal')">&times;</button>
+            </div>
+            
+            <form id="edit-content-form">
+                <div class="form-group">
+                    <label for="site-title" class="form-label">Site Title</label>
+                    <input type="text" id="site-title" class="form-input" value="Ivan Moreira">
+                </div>
+                
+                <div class="form-group">
+                    <label for="site-description" class="form-label">Site Description</label>
+                    <textarea id="site-description" class="form-textarea">Strategic Project Manager & Digital Transformation Consultant. Helping organizations navigate complex transformations with AI-enhanced methodologies.</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="hero-title" class="form-label">Hero Title</label>
+                    <input type="text" id="hero-title" class="form-input" value="Strategic Project Manager & Digital Transformation Consultant">
+                </div>
+                
+                <div class="form-group">
+                    <label for="hero-subtitle" class="form-label">Hero Subtitle</label>
+                    <textarea id="hero-subtitle" class="form-textarea">Helping organizations navigate complex transformations with AI-enhanced methodologies and proven leadership strategies.</textarea>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn">Save Changes</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('edit-content-modal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Manage Images Modal -->
+    <div id="manage-images-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Manage Images</h2>
+                <button class="close-btn" onclick="closeModal('manage-images-modal')">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="image-upload" class="form-label">Upload New Image</label>
+                <input type="file" id="image-upload" accept="image/*" multiple>
+                <p style="font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem;">
+                    Supported formats: JPG, PNG, WebP. Max size: 5MB per image.
+                </p>
+            </div>
+            
+            <div class="form-group">
+                <h3>Current Images</h3>
+                <div id="images-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
+                        <div style="background-color: var(--background-secondary); height: 100px; border-radius: var(--radius-sm); margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                            🖼️
+                        </div>
+                        <p style="font-size: 0.875rem;">ivan-hero.jpg</p>
+                        <button class="btn btn-secondary btn-small" style="margin-top: 0.5rem;">Replace</button>
+                    </div>
+                    
+                    <div style="border: 1px solid var(--border-color); border-radius: var(--radius-md); padding: 1rem; text-align: center;">
+                        <div style="background-color: var(--background-secondary); height: 100px; border-radius: var(--radius-sm); margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                            🖼️
+                        </div>
+                        <p style="font-size: 0.875rem;">ivan-profile.jpg</p>
+                        <button class="btn btn-secondary btn-small" style="margin-top: 0.5rem;">Replace</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <button type="button" class="btn btn-secondary" onclick="closeModal('manage-images-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Site Settings Modal -->
+    <div id="site-settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Site Settings</h2>
+                <button class="close-btn" onclick="closeModal('site-settings-modal')">&times;</button>
+            </div>
+            
+            <form id="site-settings-form">
+                <div class="form-group">
+                    <label for="contact-email" class="form-label">Contact Email</label>
+                    <input type="email" id="contact-email" class="form-input" value="ivan@ivanmoreira.com">
+                </div>
+                
+                <div class="form-group">
+                    <label for="contact-phone" class="form-label">Contact Phone</label>
+                    <input type="tel" id="contact-phone" class="form-input" value="+1 (555) 123-4567">
+                </div>
+                
+                <div class="form-group">
+                    <label for="linkedin-url" class="form-label">LinkedIn URL</label>
+                    <input type="url" id="linkedin-url" class="form-input" value="https://linkedin.com/in/ivanmoreira">
+                </div>
+                
+                <div class="form-group">
+                    <label for="twitter-url" class="form-label">Twitter URL</label>
+                    <input type="url" id="twitter-url" class="form-input" value="https://twitter.com/ivanmoreira">
+                </div>
+                
+                <div class="form-group">
+                    <label for="analytics-id" class="form-label">Google Analytics ID</label>
+                    <input type="text" id="analytics-id" class="form-input" placeholder="G-XXXXXXXXXX">
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn">Save Settings</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('site-settings-modal')">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/admin/dashboard.js"></script>
+</body>
+</html>
+
