@@ -1,11 +1,12 @@
 source "https://rubygems.org"
-git_source(:github) {|repo| "https://github.com/#{repo}.git" }
+git_source(:github ) {|repo| "https://github.com/#{repo}.git" }
 
 ruby "3.4.4"
 
 gem "jekyll", "~> 4.3.0"
 gem "bigdecimal"
 gem "logger"
+gem "csv"
 
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
@@ -20,4 +21,3 @@ end
 
 gem "wdm", "~> 0.1.1", :platforms => [:mingw, :x64_mingw, :mswin]
 gem "http_parser.rb", "~> 0.6.0", :platforms => [:jruby]
-
