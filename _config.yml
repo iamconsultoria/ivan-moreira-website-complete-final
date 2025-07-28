@@ -1,34 +1,25 @@
-# Site settings
-title: Ivan Moreira
+title: Ivan Moreira - Strategic Project Manager & Digital Transformation Consultant
 email: ivan@ivanmoreira.com
 description: >-
-  Strategic Project Manager & Digital Transformation Consultant.
-  Helping organizations navigate complex transformations with AI-enhanced methodologies.
+  Strategic Project Manager & Digital Transformation Consultant helping organizations 
+  navigate complex transformations with AI-enhanced methodologies and proven leadership strategies.
 baseurl: ""
-url: "https://ivanmoreira.com"
-
-# Author information
-author:
-  name: Ivan Moreira
-  email: ivan@ivanmoreira.com
-  bio: Strategic Project Manager & Digital Transformation Consultant
-  location: Global
-  linkedin: ivanmoreira
-  twitter: ivanmoreira
+url: ""
 
 # Build settings
 markdown: kramdown
 highlighter: rouge
-permalink: /:categories/:title/
+permalink: pretty
 
 # Collections
 collections:
   services:
     output: true
-    permalink: /services/:name/
-  speaking:
-    output: true
-    permalink: /speaking/:name/
+    permalink: /:collection/:name/
+
+# Include pages from _pages directory
+include:
+  - _pages
 
 # Plugins
 plugins:
@@ -36,85 +27,57 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: "_pages"
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: "_services"
+      type: "services"
+    values:
+      layout: "service"
+
 # Exclude from processing
 exclude:
+  - .sass-cache/
+  - .jekyll-cache/
+  - gemfiles/
   - Gemfile
   - Gemfile.lock
-  - node_modules
+  - node_modules/
   - vendor/bundle/
   - vendor/cache/
   - vendor/gems/
   - vendor/ruby/
-  - README.md
   - admin/
 
-# Sass configuration
-sass:
-  sass_dir: _sass
-  style: compressed
+# Site data
+author:
+  name: Ivan Moreira
+  email: ivan@ivanmoreira.com
+  linkedin: https://linkedin.com/in/ivanmoreira
+  twitter: https://twitter.com/ivanmoreiraconsulting
 
-# SEO settings
+# SEO
 twitter:
-  username: ivanmoreira
+  username: ivanmoreiraconsulting
   card: summary_large_image
 
 facebook:
   app_id: 
   publisher: 
-  admins: 
 
 social:
   name: Ivan Moreira
   links:
-    - https://twitter.com/ivanmoreira
     - https://linkedin.com/in/ivanmoreira
-    - https://github.com/ivanmoreira
-
-# Google Analytics
-google_analytics: 
-
-# Contact form settings
-contact:
-  email: ivan@ivanmoreira.com
-  phone: "+1 (555) 123-4567"
-  address: "Global Remote Consulting"
-
-# Navigation
-navigation:
-  - name: Home
-    url: /
-  - name: About
-    url: /about/
-  - name: Services
-    url: /services/
-  - name: Speaking
-    url: /speaking/
-  - name: Blog
-    url: /blog/
-  - name: Contact
-    url: /contact/
-
-# Footer links
-footer_links:
-  - name: Privacy Policy
-    url: /privacy/
-  - name: Terms of Service
-    url: /terms/
-  - name: Contact
-    url: /contact/
-
-# Theme settings
-theme_color: "#007AFF"
-background_color: "#FFFFFF"
-text_color: "#1D1D1F"
-accent_color: "#007AFF"
-
-# Performance settings
-compress_html:
-  clippings: all
-  comments: all
-  endings: all
-  startings: []
-  blanklines: false
-  profile: false
+    - https://twitter.com/ivanmoreiraconsulting
 
