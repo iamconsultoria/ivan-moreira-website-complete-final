@@ -1,229 +1,179 @@
 ---
 layout: default
-title: Blog & Articles
-description: Thought leadership articles on digital transformation, AI-enhanced project management, and strategic consulting insights.
+title: Latest Insights & Articles
 permalink: /blog/
 ---
 
-<section class="page-hero">
-    <div class="page-hero-container">
-        <h1 class="page-title">Blog & Articles</h1>
-        <p class="page-subtitle">Insights on digital transformation, AI, and project management excellence</p>
-    </div>
-</section>
+# Latest Insights & Articles
 
-<section class="blog-featured">
-    <div class="blog-container">
-        <h2 class="section-title">Featured Articles</h2>
-        
-        <div class="featured-grid">
-            {% assign featured_posts = site.posts | where: "featured", true | limit: 2 %}
-            {% for post in featured_posts %}
-            <article class="featured-article">
-                <div class="featured-image">
-                    <img src="{{ post.image | default: '/assets/images/blog-default.jpg' }}" alt="{{ post.title }}">
-                </div>
-                <div class="featured-content">
-                    <div class="article-meta">
-                        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
-                        <span class="article-category">{{ post.category }}</span>
-                        <span class="read-time">{{ post.read_time | default: "5 min read" }}</span>
-                    </div>
-                    <h3 class="article-title">{{ post.title }}</h3>
-                    <p class="article-excerpt">{{ post.excerpt | strip_html | truncate: 200 }}</p>
-                    <a href="{{ post.url }}" class="cta-button secondary">Read Full Article</a>
-                </div>
-            </article>
-            {% endfor %}
-        </div>
-    </div>
-</section>
+Thought leadership on digital transformation, AI, and project management from Ivan Moreira.
 
-<section class="blog-categories">
-    <div class="blog-container">
-        <h2 class="section-title">Article Categories</h2>
-        
-        <div class="categories-grid">
-            <div class="category-card">
-                <div class="category-icon">🤖</div>
-                <h3>AI & Technology</h3>
-                <p>Exploring the intersection of artificial intelligence and business transformation.</p>
-                <div class="category-count">8 Articles</div>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-icon">🎯</div>
-                <h3>Project Management</h3>
-                <p>Best practices, methodologies, and innovations in project delivery excellence.</p>
-                <div class="category-count">12 Articles</div>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-icon">🔄</div>
-                <h3>Digital Transformation</h3>
-                <p>Strategic insights on organizational change and digital evolution.</p>
-                <div class="category-count">10 Articles</div>
-            </div>
-            
-            <div class="category-card">
-                <div class="category-icon">👑</div>
-                <h3>Leadership</h3>
-                <p>Leadership principles and practices for the digital age.</p>
-                <div class="category-count">6 Articles</div>
-            </div>
-        </div>
-    </div>
-</section>
+## Featured Articles
 
-<section class="blog-articles">
-    <div class="blog-container">
-        <h2 class="section-title">Latest Articles</h2>
-        
-        <div class="articles-grid">
-            {% for post in site.posts limit: 9 %}
-            <article class="blog-card">
-                <div class="blog-image">
-                    <img src="{{ post.image | default: '/assets/images/blog-default.jpg' }}" alt="{{ post.title }}">
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %d, %Y" }}</time>
-                        <span class="blog-category">{{ post.category }}</span>
-                    </div>
-                    <h3 class="blog-title">{{ post.title }}</h3>
-                    <p class="blog-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
-                    <div class="blog-footer">
-                        <span class="read-time">{{ post.read_time | default: "5 min read" }}</span>
-                        <a href="{{ post.url }}" class="blog-link">Read More</a>
-                    </div>
-                </div>
-            </article>
-            {% endfor %}
-        </div>
-        
-        <div class="pagination">
-            <div class="pagination-info">
-                Showing 1-9 of {{ site.posts.size }} articles
-            </div>
-            <div class="pagination-controls">
-                <button class="pagination-btn" disabled>Previous</button>
-                <span class="pagination-current">1</span>
-                <button class="pagination-btn">Next</button>
-            </div>
-        </div>
-    </div>
-</section>
+### The Future of Project Management: AI Integration and Human Leadership
+*Published March 15, 2024 | AI & Technology*
 
-<section class="newsletter-signup">
-    <div class="newsletter-container">
-        <div class="newsletter-content">
-            <h2 class="newsletter-title">Stay Updated</h2>
-            <p class="newsletter-description">Subscribe to receive the latest insights on digital transformation, AI, and project management directly in your inbox.</p>
-            
-            <form class="newsletter-form">
-                <div class="form-group">
-                    <input type="email" placeholder="Enter your email address" required>
-                    <button type="submit" class="cta-button primary">Subscribe</button>
-                </div>
-                <p class="newsletter-privacy">No spam, unsubscribe at any time. Read our <a href="/privacy/">privacy policy</a>.</p>
-            </form>
-        </div>
-    </div>
-</section>
+Exploring how artificial intelligence is revolutionizing project management while emphasizing the irreplaceable value of human leadership and strategic thinking. This comprehensive analysis examines the current state of AI in project management and provides a roadmap for successful integration.
 
-<section class="blog-archive">
-    <div class="blog-container">
-        <h2 class="section-title">Article Archive</h2>
-        
-        <div class="archive-filters">
-            <div class="filter-group">
-                <label for="year-filter">Year:</label>
-                <select id="year-filter">
-                    <option value="">All Years</option>
-                    <option value="2024">2024</option>
-                    <option value="2023">2023</option>
-                    <option value="2022">2022</option>
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label for="category-filter">Category:</label>
-                <select id="category-filter">
-                    <option value="">All Categories</option>
-                    <option value="ai-technology">AI & Technology</option>
-                    <option value="project-management">Project Management</option>
-                    <option value="digital-transformation">Digital Transformation</option>
-                    <option value="leadership">Leadership</option>
-                </select>
-            </div>
-            
-            <div class="filter-group">
-                <label for="search-filter">Search:</label>
-                <input type="text" id="search-filter" placeholder="Search articles...">
-            </div>
-        </div>
-        
-        <div class="archive-list">
-            {% for post in site.posts %}
-            <div class="archive-item" data-year="{{ post.date | date: '%Y' }}" data-category="{{ post.category | slugify }}">
-                <div class="archive-date">{{ post.date | date: "%b %d, %Y" }}</div>
-                <div class="archive-content">
-                    <h3 class="archive-title"><a href="{{ post.url }}">{{ post.title }}</a></h3>
-                    <p class="archive-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
-                    <div class="archive-meta">
-                        <span class="archive-category">{{ post.category }}</span>
-                        <span class="archive-read-time">{{ post.read_time | default: "5 min read" }}</span>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
+**Key Topics Covered:**
+- Current AI applications in project management
+- Benefits and limitations of automated project tools
+- The evolving role of project managers
+- Implementation strategies for AI adoption
+- Future trends and predictions
 
-<section class="contact-cta">
-    <div class="contact-cta-container">
-        <div class="contact-cta-content">
-            <h2 class="contact-cta-title">Have a Topic Suggestion?</h2>
-            <p class="contact-cta-description">I'm always interested in exploring new topics and answering questions from the community. Share your ideas or questions.</p>
-            <a href="/contact/" class="cta-button primary">Suggest a Topic</a>
-        </div>
-    </div>
-</section>
+[Read Full Article](#) | *8 min read*
 
-<script>
-// Blog filtering functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const yearFilter = document.getElementById('year-filter');
-    const categoryFilter = document.getElementById('category-filter');
-    const searchFilter = document.getElementById('search-filter');
-    const archiveItems = document.querySelectorAll('.archive-item');
-    
-    function filterArticles() {
-        const selectedYear = yearFilter.value;
-        const selectedCategory = categoryFilter.value;
-        const searchTerm = searchFilter.value.toLowerCase();
-        
-        archiveItems.forEach(item => {
-            const itemYear = item.dataset.year;
-            const itemCategory = item.dataset.category;
-            const itemText = item.textContent.toLowerCase();
-            
-            const yearMatch = !selectedYear || itemYear === selectedYear;
-            const categoryMatch = !selectedCategory || itemCategory === selectedCategory;
-            const searchMatch = !searchTerm || itemText.includes(searchTerm);
-            
-            if (yearMatch && categoryMatch && searchMatch) {
-                item.style.display = 'flex';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-    
-    yearFilter.addEventListener('change', filterArticles);
-    categoryFilter.addEventListener('change', filterArticles);
-    searchFilter.addEventListener('input', filterArticles);
-});
-</script>
+---
+
+### Digital Transformation Success: Lessons from 200+ Projects
+*Published February 28, 2024 | Digital Transformation*
+
+A deep dive into the patterns of success and failure observed across hundreds of digital transformation initiatives. Learn from real-world case studies and discover the critical factors that determine transformation outcomes.
+
+**Key Topics Covered:**
+- Common transformation pitfalls and how to avoid them
+- The importance of change management in digital initiatives
+- Technology selection and implementation strategies
+- Measuring transformation ROI and success metrics
+- Building organizational readiness for change
+
+[Read Full Article](#) | *12 min read*
+
+---
+
+### Leading Through Uncertainty: Project Management in Volatile Times
+*Published February 10, 2024 | Leadership*
+
+How project leaders can navigate uncertainty, manage risk, and deliver results even in the most challenging business environments. Practical strategies for adaptive project management.
+
+**Key Topics Covered:**
+- Agile approaches to uncertain environments
+- Risk management and contingency planning
+- Stakeholder communication during crisis
+- Building resilient project teams
+- Adaptive planning methodologies
+
+[Read Full Article](#) | *10 min read*
+
+---
+
+## Recent Articles
+
+### The ROI of AI in Project Management: A Data-Driven Analysis
+*Published January 25, 2024 | AI & Technology*
+
+Comprehensive analysis of return on investment for AI implementations in project management, based on data from 50+ organizations.
+
+[Read Article](#) | *6 min read*
+
+---
+
+### Change Management 3.0: Digital-First Approaches
+*Published January 12, 2024 | Change Management*
+
+How traditional change management methodologies are evolving for the digital age, with new tools and techniques for modern organizations.
+
+[Read Article](#) | *8 min read*
+
+---
+
+### Building High-Performance Remote Project Teams
+*Published December 20, 2023 | Team Management*
+
+Strategies for creating and managing effective project teams in distributed work environments, based on lessons learned from global projects.
+
+[Read Article](#) | *7 min read*
+
+---
+
+## Article Categories
+
+### AI & Technology
+Exploring the intersection of artificial intelligence, emerging technologies, and project management practices.
+
+- AI Integration Strategies
+- Technology Assessment Frameworks
+- Digital Tool Evaluations
+- Future Technology Trends
+
+### Digital Transformation
+Insights and strategies for successful organizational transformation in the digital age.
+
+- Transformation Methodologies
+- Change Management Best Practices
+- Technology Adoption Strategies
+- Cultural Change Initiatives
+
+### Leadership
+Thought leadership on project management, executive decision-making, and organizational leadership.
+
+- Strategic Leadership Principles
+- Executive Communication
+- Decision-Making Frameworks
+- Leadership Development
+
+### Project Management
+Advanced project management concepts, methodologies, and best practices for complex initiatives.
+
+- Advanced PM Methodologies
+- Risk Management Strategies
+- Stakeholder Engagement
+- Quality Assurance Practices
+
+## Industry Publications
+
+Ivan's insights have been featured in leading industry publications:
+
+- **Harvard Business Review** - "The Human Element in Digital Transformation"
+- **MIT Sloan Management Review** - "AI-Enhanced Project Management"
+- **PMI Network Magazine** - "Leading Change in Complex Organizations"
+- **McKinsey Insights** - "Technology Leadership in Uncertain Times"
+- **Forbes Technology Council** - "Strategic Technology Investment"
+
+## Speaking & Media
+
+### Podcast Appearances
+- **Project Management Podcast** - "The Future of PM Leadership"
+- **Digital Transformation Today** - "AI in Business Operations"
+- **Executive Insights** - "Strategic Technology Decisions"
+
+### Webinar Series
+- **Monthly PM Masterclass** - Advanced project management topics
+- **Transformation Tuesdays** - Digital transformation insights
+- **AI in Business** - Practical AI implementation strategies
+
+## Newsletter Subscription
+
+Stay updated with the latest insights, articles, and industry trends. Join 5,000+ professionals who receive our monthly newsletter.
+
+**What You'll Get:**
+- Exclusive articles and insights
+- Industry trend analysis
+- Case study highlights
+- Event and speaking updates
+- Resource recommendations
+
+[Subscribe to Newsletter](#) | *No spam, unsubscribe anytime*
+
+## Article Requests & Topics
+
+Have a specific topic you'd like to see covered? Ivan welcomes suggestions for future articles and is always looking for relevant, timely subjects that would benefit the project management and digital transformation community.
+
+**Popular Requested Topics:**
+- Specific industry transformation challenges
+- Emerging technology assessments
+- Regional market insights
+- Methodology comparisons
+- Tool evaluations and reviews
+
+[Suggest an Article Topic](/contact/)
+
+---
+
+**Want to collaborate on content?**
+
+Ivan is available for guest articles, co-authored pieces, and expert commentary. Media professionals and publication editors are welcome to reach out for quotes, interviews, and collaborative content opportunities.
+
+[Media Inquiries](/contact/) | [Download Media Kit](#) | [View Writing Samples](#)
 
