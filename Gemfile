@@ -5,8 +5,10 @@ ruby "3.4.4"
 
 gem "jekyll", "~> 4.3.0"
 gem "bigdecimal"
-gem "logger"
+gem "logger" 
 gem "csv"
+gem "base64"
+gem "ostruct"
 
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
